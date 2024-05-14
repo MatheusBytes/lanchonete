@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.string('endereco',45).notNullable().unique()
       table.string('sexo',45).notNullable().unique()
       table.string('telefone',45).notNullable().unique()
-      table.string('cargo_Id',45).notNullable().unique()
-
+      // table.string('cargo_Id',45).notNullable().unique()
+      table.integer('cargo_id').unsigned().references('id').inTable('cargos')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
