@@ -1,4 +1,4 @@
-import Comanda from "#models/comanda"
+import Comanda from "../models/comanda.js"
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ComandasController {
