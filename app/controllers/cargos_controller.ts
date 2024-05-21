@@ -1,7 +1,6 @@
 // import type { HttpContext } from '@adonisjs/core/http'
-
 import Cargo from "#models/cargo"
-import type{ HttpContext } from "@adonisjs/core/http";
+import type { HttpContext } from "@adonisjs/core/http";
 
 export default class CargosController {
 

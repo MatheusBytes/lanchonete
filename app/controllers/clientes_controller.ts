@@ -2,43 +2,43 @@ import Cliente from '#models/cliente'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ClientesController {
-  async index({ request }: HttpContext) {
-    const page = request.input('page', 1)
-    const perPage = request.input('perPage', 10)
-    return await Cliente.query().paginate(page, perPage)
-}
+    async index({ request }: HttpContext) {
+        const page = request.input('page', 1)
+        const perPage = request.input('perPage', 10)
+        return await Cliente.query().paginate(page, perPage)
+    }
 
-// Requisição por id passado por rota(parãmetros)
-async show({ params }: HttpContext) {
-    return await Cliente.query().where('id', params.id).preload('comandas').first()
-}
+   
+    async show({ params }: HttpContext) {
+        return await Cliente.query().where('id', params.id).preload('comandas').first()
+    }
 
-// Método para criar algum Cliente pelo Json
-async store({ request }: HttpContext) {
-    const dados = request.only(['nome', 'cpf', 'telefone', 'email'])
-    return await Cliente.create(dados)
-}
+   
+    async store({ request }: HttpContext) {
+        const dados = request.only(['nome', 'cpf', 'telefone', 'email'])
+        return await Cliente.create(dados)
+    }
 
-async update({params, request}: HttpContext){
-    const clientes = await Cliente.findOrFail(params.id)
-    const dados = request.only(['nome', 'cpf', 'telefone', 'email'])
-    
-    clientes.merge(dados)
-    return await clientes.save()
-}
+    async update({ params, request }: HttpContext) {
+        const clientes = await Cliente.findOrFail(params.id)
+        const dados = request.only(['nome', 'cpf', 'telefone', 'email'])
 
-// Deletando pruduto pelo Id do banco de dados
-async destroy({ params }: HttpContext) {
-    const clientes = await Cliente.findOrFail(params.id)
+        clientes.merge(dados)
+        return await clientes.save()
+    }
 
-    await clientes.delete()
-    return { msg: 'Registro deletado com sucesso', clientes }
+   
+    async destroy({ params }: HttpContext) {
+        const clientes = await Cliente.findOrFail(params.id)
 
-            // try {
+        await clientes.delete()
+        return { msg: 'Registro deletado com sucesso', clientes }
+
+        // try {
         //     return {msg: 'registro deletado com sucesso',clientes}
         // } catch (error) {
         //     return {msg :error}
         // }
 
-}
+    }
 }
