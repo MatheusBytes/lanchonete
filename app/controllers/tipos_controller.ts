@@ -1,5 +1,3 @@
-
-
 import type { HttpContext } from '@adonisjs/core/http'
 
 import Tipo from "../models/tipo.js"
@@ -10,7 +8,7 @@ export default class TiposController {
         const page = request.input('page',1 )
         const perPage = request.input('perPage',10 )
 
-        return await Tipo.query().paginate(page,perPage)
+        return await Tipo.query().preload('produtos').paginate(page,perPage)
     }
 
 
@@ -21,7 +19,7 @@ export default class TiposController {
     }
 
     async store({ request }: HttpContext) {
-        const dados = request.only(['nome', 'preco', 'tamanho', 'tipoId'])
+        const dados = request.only(['nome'])
 
 
         return await Tipo.create(dados)
